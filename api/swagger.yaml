@@ -1,0 +1,210 @@
+---
+swagger: "2.0"
+info:
+  description: "defaultDescription"
+  version: "0.1"
+  title: "defaultTitle"
+paths:
+  /adresse:
+    get:
+      operationId: "adresseGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Definition generated from Swagger Inspector"
+          schema:
+            $ref: "#/definitions/Adresses"
+      x-swagger-router-controller: "Default"
+    post:
+      operationId: "adressePOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/AdresseWithoutId"
+        x-examples:
+          application/json: "{\n    \"ADR_NUM_VOIE\": \"25\",\n    \"ADR_LIBELLE_RUE\"\
+            : \"rue de la liberté\",\n    \"ADR_VILLE\": \"Brest\"\n}"
+      responses:
+        201:
+          description: "Definition generated from Swagger Inspector"
+          schema:
+            $ref: "#/definitions/Adresse"
+      x-swagger-router-controller: "Default"
+  /adresse/1:
+    get:
+      operationId: "adresse1GET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Definition generated from Swagger Inspector"
+          schema:
+            $ref: "#/definitions/Adresse"
+      x-swagger-router-controller: "Default"
+  /adresse/14:
+    put:
+      operationId: "adresse14PUT"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/AdresseWithoutId"
+        x-examples:
+          application/json: "{\n    \"ADR_NUM_VOIE\": \"25\",\n    \"ADR_LIBELLE_RUE\"\
+            : \"rue de la liberté\",\n    \"ADR_VILLE\": \"Laval\"\n}"
+      responses:
+        200:
+          description: "Definition generated from Swagger Inspector"
+          schema:
+            $ref: "#/definitions/Adresse"
+      x-swagger-router-controller: "Default"
+  /auth/signup:
+    post:
+      operationId: "authSignupPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/User"
+        x-examples:
+          application/json: "{\n    \"UTI_NOM\": \"Jean\",\n    \"UTI_PRENOM\": \"\
+            Bob\",\n    \"UTI_LOGIN\": \"JBob\",\n    \"UTI_MDP\": \"azerty123\",\n\
+            \    \"UTI_ADMINISTRATEUR\": true\n}"
+      responses:
+        200:
+          description: "Definition generated from Swagger Inspector"
+          schema:
+            $ref: "#/definitions/SignupReturn"
+      x-swagger-router-controller: "Default"
+  /auth/login:
+    post:
+      operationId: "authLoginPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/User"
+        x-examples:
+          application/json: "{\n    \"UTI_LOGIN\": \"JBob\",\n    \"UTI_MDP\": \"\
+            azerty123\"\n}"
+      responses:
+        201:
+          description: "Definition generated from Swagger Inspector"
+          schema:
+            $ref: "#/definitions/LoginReturn"
+      x-swagger-router-controller: "Default"
+definitions:
+  User:
+    properties:
+      UTI_NOM:
+        type: "string"
+      UTI_PRENOM:
+        type: "string"
+      UTI_LOGIN:
+        type: "string"
+      UTI_MDP:
+        type: "string"
+      UTI_ADMINISTRATEUR:
+        type: "boolean"
+    example:
+      UTI_ADMINISTRATEUR: true
+      UTI_LOGIN: "UTI_LOGIN"
+      UTI_PRENOM: "UTI_PRENOM"
+      UTI_MDP: "UTI_MDP"
+      UTI_NOM: "UTI_NOM"
+  AdresseWithoutId:
+    properties:
+      ADR_NUM_VOIE:
+        type: "string"
+      ADR_LIBELLE_RUE:
+        type: "string"
+      ADR_VILLE:
+        type: "string"
+    example:
+      ADR_NUM_VOIE: "ADR_NUM_VOIE"
+      ADR_LIBELLE_RUE: "ADR_LIBELLE_RUE"
+      ADR_VILLE: "ADR_VILLE"
+  Adresse:
+    properties:
+      ADR_ID:
+        type: "integer"
+        format: "int32"
+      ADR_NUM_VOIE:
+        type: "string"
+      ADR_LIBELLE_RUE:
+        type: "string"
+      ADR_VILLE:
+        type: "string"
+    example:
+      ADR_ID: 0
+      ADR_NUM_VOIE: "ADR_NUM_VOIE"
+      ADR_LIBELLE_RUE: "ADR_LIBELLE_RUE"
+      ADR_VILLE: "ADR_VILLE"
+  Adresses:
+    properties:
+      adresse:
+        type: "array"
+        items:
+          $ref: "#/definitions/Adresse"
+    example:
+      adresse:
+      - ADR_ID: 0
+        ADR_NUM_VOIE: "ADR_NUM_VOIE"
+        ADR_LIBELLE_RUE: "ADR_LIBELLE_RUE"
+        ADR_VILLE: "ADR_VILLE"
+      - ADR_ID: 0
+        ADR_NUM_VOIE: "ADR_NUM_VOIE"
+        ADR_LIBELLE_RUE: "ADR_LIBELLE_RUE"
+        ADR_VILLE: "ADR_VILLE"
+  SignupReturn:
+    properties:
+      message:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int32"
+      nom:
+        type: "string"
+      prenom:
+        type: "string"
+      login:
+        type: "string"
+    example:
+      id: 0
+      message: "message"
+      login: "login"
+      nom: "nom"
+      prenom: "prenom"
+  LoginReturn:
+    properties:
+      token:
+        type: "string"
+      userId:
+        type: "string"
+    example:
+      userId: "userId"
+      token: "token"
