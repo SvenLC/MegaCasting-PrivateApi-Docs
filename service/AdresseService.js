@@ -3,10 +3,10 @@
 
 /**
  *
- * body AdresseWithoutId  (optional)
+ * adresseId Long ID de l'adresse recherchée
  * returns Adresse
  **/
-exports.adresse14PUT = function(body) {
+exports.adresseAdresseIdGET = function(adresseId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -26,9 +26,11 @@ exports.adresse14PUT = function(body) {
 
 /**
  *
+ * adresseId Long ID de l'adresse recherchée
+ * body AdresseWithoutId  (optional)
  * returns Adresse
  **/
-exports.adresse1GET = function() {
+exports.adresseAdresseIdPUT = function(adresseId,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -47,6 +49,7 @@ exports.adresse1GET = function() {
 
 
 /**
+ * Permet de récupérer toutes les adresses
  *
  * returns Adresses
  **/
@@ -76,6 +79,7 @@ exports.adresseGET = function() {
 
 
 /**
+ * Permet d'ajouter une adresse
  *
  * body AdresseWithoutId  (optional)
  * returns Adresse
@@ -88,51 +92,6 @@ exports.adressePOST = function(body) {
   "ADR_NUM_VOIE" : "ADR_NUM_VOIE",
   "ADR_LIBELLE_RUE" : "ADR_LIBELLE_RUE",
   "ADR_VILLE" : "ADR_VILLE"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
-
-/**
- *
- * body User  (optional)
- * returns LoginReturn
- **/
-exports.authLoginPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "userId" : "userId",
-  "token" : "token"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
-
-/**
- *
- * body User  (optional)
- * returns SignupReturn
- **/
-exports.authSignupPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "message" : "message",
-  "login" : "login",
-  "nom" : "nom",
-  "prenom" : "prenom"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);

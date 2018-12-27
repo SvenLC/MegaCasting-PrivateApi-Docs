@@ -1,7 +1,7 @@
 {
-  "name": "defaulttitle",
+  "name": "megacasting-private-api-documentation",
   "version": "0.1",
-  "description": "defaultDescription",
+  "description": "Documentation de l'api privée megacasting",
   "main": "index.js",
   "scripts": {
 	"prestart": "npm install",

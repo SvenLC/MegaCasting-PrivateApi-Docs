@@ -1,23 +1,35 @@
 ---
 swagger: "2.0"
 info:
-  description: "defaultDescription"
+  description: "Documentation de l'api privée megacasting"
   version: "0.1"
-  title: "defaultTitle"
+  title: "MegaCasting private API documentation"
+host: "megacastingprivateapi.azurewebsites.net"
+tags:
+- name: "adresse"
+  description: "adresse CRUD"
+- name: "Utilisateur"
+  description: "Ajout et authentification"
 paths:
   /adresse:
     get:
+      tags:
+      - "adresse"
+      summary: "Permet de récupérer toutes les adresses"
       operationId: "adresseGET"
       produces:
       - "application/json"
       parameters: []
       responses:
         200:
-          description: "Definition generated from Swagger Inspector"
+          description: "Retourne une liste d'adresses"
           schema:
             $ref: "#/definitions/Adresses"
-      x-swagger-router-controller: "Default"
+      x-swagger-router-controller: "Adresse"
     post:
+      tags:
+      - "adresse"
+      summary: "Permet d'ajouter une adresse"
       operationId: "adressePOST"
       consumes:
       - "application/json"
@@ -34,30 +46,45 @@ paths:
             : \"rue de la liberté\",\n    \"ADR_VILLE\": \"Brest\"\n}"
       responses:
         201:
-          description: "Definition generated from Swagger Inspector"
+          description: "Retourne l'adresse créée avec son id"
           schema:
             $ref: "#/definitions/Adresse"
-      x-swagger-router-controller: "Default"
-  /adresse/1:
+      x-swagger-router-controller: "Adresse"
+  /adresse/{adresseId}:
     get:
-      operationId: "adresse1GET"
+      tags:
+      - "adresse"
+      operationId: "adresseAdresseIdGET"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - name: "adresseId"
+        in: "path"
+        description: "ID de l'adresse recherchée"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
         200:
           description: "Definition generated from Swagger Inspector"
           schema:
             $ref: "#/definitions/Adresse"
-      x-swagger-router-controller: "Default"
-  /adresse/14:
+      x-swagger-router-controller: "Adresse"
     put:
-      operationId: "adresse14PUT"
+      tags:
+      - "adresse"
+      operationId: "adresseAdresseIdPUT"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
+      - name: "adresseId"
+        in: "path"
+        description: "ID de l'adresse recherchée"
+        required: true
+        type: "integer"
+        format: "int64"
       - in: "body"
         name: "body"
         required: false
@@ -71,9 +98,11 @@ paths:
           description: "Definition generated from Swagger Inspector"
           schema:
             $ref: "#/definitions/Adresse"
-      x-swagger-router-controller: "Default"
+      x-swagger-router-controller: "Adresse"
   /auth/signup:
     post:
+      tags:
+      - "utilisateur"
       operationId: "authSignupPOST"
       consumes:
       - "application/json"
@@ -94,9 +123,11 @@ paths:
           description: "Definition generated from Swagger Inspector"
           schema:
             $ref: "#/definitions/SignupReturn"
-      x-swagger-router-controller: "Default"
+      x-swagger-router-controller: "Utilisateur"
   /auth/login:
     post:
+      tags:
+      - "utilisateur"
       operationId: "authLoginPOST"
       consumes:
       - "application/json"
@@ -116,7 +147,7 @@ paths:
           description: "Definition generated from Swagger Inspector"
           schema:
             $ref: "#/definitions/LoginReturn"
-      x-swagger-router-controller: "Default"
+      x-swagger-router-controller: "Utilisateur"
 definitions:
   User:
     properties:
