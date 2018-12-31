@@ -1,0 +1,278 @@
+swagger: '2.0'
+info:
+  description: Documentation de l'api privée megacasting
+  version: '0.1'
+  title: MegaCasting private API documentation
+host: "megacastingprivateapi.azurewebsites.net"
+tags:
+- name: "Adresse"
+  description: "Liste des routes pour les adresses"
+- name: "Authentification"
+  description: "Logique d'authentification"
+- name: "Prospect"
+  description: "Liste des routes pour les prospects"
+paths:
+  '/auth/login':
+    post:
+      tags:
+      - "Authentification"
+      summary: Authentification à l'api
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+          x-examples:
+            application/json: |-
+              {
+                  "UTI_LOGIN": "JBob",
+                  "UTI_MDP": "azerty123"
+              }
+      responses:
+        '201':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/LoginReturn'
+  /adresses:
+    get:
+      tags:
+      - "Adresse"
+      summary: Récupérer la liste des adresses
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Retourne une liste d'adresses
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Adresse'
+    post:
+      tags:
+      - "Adresse"
+      summary: Ajouter une adresse
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              ADR_NUM_VOIE:
+                type: string
+              ADR_LIBELLE_RUE:
+                type: string
+              ADR_VILLE:
+                type: string
+          x-examples:
+            application/json: |-
+              {
+                  "ADR_NUM_VOIE": "25",
+                  "ADR_LIBELLE_RUE": "rue de la liberté",
+                  "ADR_VILLE": "Brest"
+              }
+      responses:
+        '201':
+          description: Retourne l'adresse créée avec son id
+          schema:
+            $ref: '#/definitions/Adresse'
+  /adresses/{adresseId}:
+    get:
+      tags:
+      - "Adresse"
+      summary: Récupérer une adresse par son id
+      produces:
+        - application/json
+      parameters:
+      - name: "adresseId"
+        in: "path"
+        description: "ID de l'adresse recherchée"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Retourne l'adresse correspondant à adresseId
+          schema:
+            $ref: '#/definitions/Adresse'
+    put:
+      tags:
+      - "Adresse"
+      summary: Mettre à jour une adresse par son id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: "adresseId"
+        in: "path"
+        description: "ID de l'adresse recherchée"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            ADR_NUM_VOIE:
+              type: string
+            ADR_LIBELLE_RUE:
+              type: string
+            ADR_VILLE:
+              type: string
+        x-examples:
+          application/json: |-
+            {
+                "ADR_NUM_VOIE": "25",
+                "ADR_LIBELLE_RUE": "rue de la liberté",
+                "ADR_VILLE": "Laval"
+            }
+      responses:
+        '200':
+          description: Met à jour l'adresse correspondantà adresseId
+          schema:
+            $ref: '#/definitions/Adresse'
+  '/prospects':
+    get:
+      tags:
+      - "Prospect"
+      summary: Récupérer la liste des prospects
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Crée un prospect
+          schema:
+            properties:
+              prospect:
+                type: array
+                items:
+                  $ref: '#/definitions/Prospect'
+    post:
+      tags: 
+      - "Prospect"
+      summary: Ajouter un prospect
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              PRO_NAME:
+                type: string
+          x-examples:
+            application/json: |-
+              {
+                  "PRO_NAME": "Emili"
+              }
+      responses:
+        '201':
+          description: Retourne le prospect crée
+          schema:
+            $ref: '#/definitions/Prospect'
+  '/prospects/{prospectId}':
+    get:
+      tags:
+      - "Prospect"
+      produces:
+        - application/json
+      parameters:
+      - name: "prospectId"
+        in: "path"
+        description: "ID du prospect recherché"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Retourne le prospect correspondant à prospectId
+          schema:
+            $ref: '#/definitions/Prospect'
+        '404':
+          description: "Prospect non trouvé"
+    put:
+      tags:
+      - "Prospect"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: "prospectId"
+        in: "path"
+        description: "ID du prospect recherché"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Retourne le prospect modifié correspondant à prospectId
+          schema:
+            $ref: '#/definitions/Prospect'
+        '404':
+          description: "Prospect non trouvé"
+    delete:
+      tags:
+      - "Prospect"
+      produces:
+        - application/json
+      parameters:
+      - name: "prospectId"
+        in: "path"
+        description: "ID du prospect recherché"
+        required: true
+        type: "integer"
+        format: "int64"
+      description: Supprimer un prospect
+      responses:
+        '200':
+          description: Retourne le prospect supprimé correspondant à prospectId
+          schema:
+            $ref: '#/definitions/Prospect'
+definitions:
+  User:
+    properties:
+      UTI_LOGIN:
+        type: string
+      UTI_MDP:
+        type: string
+  Adresse:
+    properties:
+      ADR_ID:
+        type: integer
+        format: int32
+      ADR_NUM_VOIE:
+        type: string
+      ADR_LIBELLE_RUE:
+        type: string
+      ADR_VILLE:
+        type: string
+  LoginReturn:
+    properties:
+      UTI_ID:
+        type: string
+      UTI_TOKEN:
+        type: string
+  Prospect:
+    properties:
+      PRO_ID:
+        type: integer
+        format: int32
+      PRO_NAME:
+        type: string
